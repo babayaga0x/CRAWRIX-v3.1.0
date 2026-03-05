@@ -186,25 +186,27 @@ def fetch_stackexchange(keyword):
     except:
         return []
 
-# google api
-def fetch_google_cse(keyword):
-    api_key = os.environ.get("GOOGLE_CSE_KEY")
-    cx = os.environ.get("GOOGLE_CSE_CX")
-    if not api_key or not cx:
+# brave api
+def fetch_brave(keyword):
+    api_key = os.environ.get("BRAVE_API_KEY")
+    if not api_key:
         return []
-    url = "https://www.googleapis.com/customsearch/v1"
+    url = "https://api.search.brave.com/res/v1/web/search"
+    headers = {
+        "Accept": "application/json",
+        "Accept-Encoding": "gzip",
+        "X-Subscription-Token": api_key,
+    }
     params = {
-        "key": api_key,
-        "cx": cx,
         "q": keyword,
-        "num": 10,
+        "count": 15,
     }
     try:
-        data = session.get(url, params=params, timeout=10).json()
+        data = session.get(url, headers=headers, params=params, timeout=10).json()
         links = [
-            item.get("link")
-            for item in data.get("items", [])
-            if item.get("link") and is_safe_url(item.get("link"))
+            item.get("url")
+            for item in data.get("web", {}).get("results", [])
+            if item.get("url") and is_safe_url(item.get("url"))
         ]
         return links[:15]
     except:
@@ -230,11 +232,11 @@ def parse():
         reddit_links = fetch_reddit(keyword)
         qwant_links = fetch_qwant(keyword)
         se_links = fetch_stackexchange(keyword)
-        google_links = fetch_google_cse(keyword)
+        brave_links = fetch_brave(keyword)
 
         combined_links = list(set(
             bing_links + yahoo_links + duck_links + wiki_links +
-            reddit_links + qwant_links + se_links + google_links
+            reddit_links + qwant_links + se_links + brave_links
         ))[:15]
 
         results.append({"keyword": keyword, "links": combined_links})
@@ -244,5 +246,6 @@ def parse():
 
 if __name__ == "__main__":
     app.run(host="0.0.0.0")
+
 
 
