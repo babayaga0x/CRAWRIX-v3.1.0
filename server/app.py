@@ -4,7 +4,6 @@ from flask_limiter import Limiter
 from flask_limiter.util import get_remote_address
 import ipaddress
 import requests
-import os
 from bs4 import BeautifulSoup
 from urllib.parse import urlparse
 
@@ -28,11 +27,9 @@ limiter = Limiter(
 
 session = requests.Session()
 
-
 @app.route("/ping")
 def ping():
     return "pong", 200
-
 
 @app.before_request
 def redirect_www_to_root():
@@ -40,7 +37,6 @@ def redirect_www_to_root():
     if host.startswith("www."):
         url = request.url.replace("//www.", "//", 1)
         return redirect(url, code=301)
-
 
 def is_safe_url(url: str) -> bool:
     try:
@@ -62,7 +58,6 @@ def is_safe_url(url: str) -> bool:
     except Exception:
         return False
 
-
 def fetch_url_safe(url, headers=None):
     if not headers:
         headers = {"User-Agent": "Mozilla/5.0"}
@@ -75,20 +70,14 @@ def fetch_url_safe(url, headers=None):
     except:
         return None
 
-
 def parse_bing(keyword):
     url = f"https://www.bing.com/search?q={keyword}"
     html = fetch_url_safe(url)
     if not html:
         return []
     soup = BeautifulSoup(html, "html.parser")
-    links = [
-        a.get("href")
-        for a in soup.select("li.b_algo h2 a")
-        if a.get("href") and is_safe_url(a.get("href"))
-    ]
+    links = [a.get("href") for a in soup.select("li.b_algo h2 a") if a.get("href") and is_safe_url(a.get("href"))]
     return links[:15]
-
 
 def parse_yahoo(keyword):
     url = f"https://search.yahoo.com/search?p={keyword}"
@@ -96,15 +85,8 @@ def parse_yahoo(keyword):
     if not html:
         return []
     soup = BeautifulSoup(html, "html.parser")
-    links = [
-        a.get("href")
-        for a in soup.select("h3.title a")
-        if a.get("href")
-        and a.get("href").startswith("http")
-        and is_safe_url(a.get("href"))
-    ]
+    links = [a.get("href") for a in soup.select("h3.title a") if a.get("href") and a.get("href").startswith("http") and is_safe_url(a.get("href"))]
     return links[:15]
-
 
 def fetch_duckduckgo(keyword):
     url = f"https://api.duckduckgo.com/?q={keyword}&format=json&no_redirect=1"
@@ -120,51 +102,34 @@ def fetch_duckduckgo(keyword):
     except:
         return []
 
-
 def fetch_wikipedia(keyword):
     url = f"https://en.wikipedia.org/w/api.php?action=query&list=search&srsearch={keyword}&format=json"
     try:
         data = session.get(url, timeout=10).json()
-        links = [
-            f"https://en.wikipedia.org/wiki/{item['title'].replace(' ', '_')}"
-            for item in data.get("query", {}).get("search", [])
-            if item.get("title")
-        ]
+        links = [f"https://en.wikipedia.org/wiki/{item['title'].replace(' ', '_')}" for item in data.get("query", {}).get("search", []) if item.get("title")]
         return [l for l in links if is_safe_url(l)][:15]
     except:
         return []
-
 
 def fetch_reddit(keyword):
     url = f"https://www.reddit.com/search.json?q={keyword}&limit=15"
     headers = {"User-Agent": "Mozilla/5.0"}
     try:
         data = session.get(url, headers=headers, timeout=10).json()
-        links = [
-            post.get("data", {}).get("url")
-            for post in data.get("data", {}).get("children", [])
-            if post.get("data", {}).get("url")
-            and is_safe_url(post.get("data", {}).get("url"))
-        ]
+        links = [post.get("data", {}).get("url") for post in data.get("data", {}).get("children", []) if post.get("data", {}).get("url") and is_safe_url(post.get("data", {}).get("url"))]
         return links[:15]
     except:
         return []
-
 
 def fetch_qwant(keyword):
     url = f"https://api.qwant.com/v3/search/web?q={keyword}&count=15&t=web"
     headers = {"User-Agent": "Mozilla/5.0"}
     try:
         data = session.get(url, headers=headers, timeout=10).json()
-        links = [
-            item.get("url")
-            for item in data.get("data", {}).get("result", {}).get("items", [])
-            if item.get("url") and is_safe_url(item.get("url"))
-        ]
+        links = [item.get("url") for item in data.get("data", {}).get("result", {}).get("items", []) if item.get("url") and is_safe_url(item.get("url"))]
         return links[:15]
     except:
         return []
-
 
 def fetch_stackexchange(keyword):
     url = "https://api.stackexchange.com/2.3/search/advanced"
@@ -173,45 +138,14 @@ def fetch_stackexchange(keyword):
         "sort": "relevance",
         "q": keyword,
         "site": "stackoverflow",
-        "pagesize": 15,
+        "pagesize": 15
     }
     try:
         data = session.get(url, params=params, timeout=10).json()
-        links = [
-            item.get("link")
-            for item in data.get("items", [])
-            if item.get("link") and is_safe_url(item.get("link"))
-        ]
+        links = [item.get("link") for item in data.get("items", []) if item.get("link") and is_safe_url(item.get("link"))]
         return links
     except:
         return []
-
-# brave api
-def fetch_brave(keyword):
-    api_key = os.environ.get("BRAVE_API_KEY")
-    if not api_key:
-        return []
-    url = "https://api.search.brave.com/res/v1/web/search"
-    headers = {
-        "Accept": "application/json",
-        "Accept-Encoding": "gzip",
-        "X-Subscription-Token": api_key,
-    }
-    params = {
-        "q": keyword,
-        "count": 15,
-    }
-    try:
-        data = session.get(url, headers=headers, params=params, timeout=10).json()
-        links = [
-            item.get("url")
-            for item in data.get("web", {}).get("results", [])
-            if item.get("url") and is_safe_url(item.get("url"))
-        ]
-        return links[:15]
-    except:
-        return []
-
 
 @app.route("/parse", methods=["POST"])
 @limiter.limit("10 per minute")
@@ -232,20 +166,19 @@ def parse():
         reddit_links = fetch_reddit(keyword)
         qwant_links = fetch_qwant(keyword)
         se_links = fetch_stackexchange(keyword)
-        brave_links = fetch_brave(keyword)
 
         combined_links = list(set(
             bing_links + yahoo_links + duck_links + wiki_links +
-            reddit_links + qwant_links + se_links + brave_links
+            reddit_links + qwant_links + se_links
         ))[:15]
 
         results.append({"keyword": keyword, "links": combined_links})
 
     return jsonify(results)
 
-
 if __name__ == "__main__":
     app.run(host="0.0.0.0")
+
 
 
 
