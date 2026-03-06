@@ -12,13 +12,19 @@ export default defineConfig({
   ],
   build: {
     target: 'esnext',
-    minify: 'terser',
-    terserOptions: {
-      compress: {
-        drop_console: true,
-        drop_debugger: true,
+    rollupOptions: {
+      output: {
+        manualChunks(id) {
+          if (id.includes('node_modules/react') || id.includes('node_modules/react-dom')) {
+            return 'react'
+          }
+          if (id.includes('node_modules')) {
+            return 'vendor'
+          }
+        }
       },
     },
+  },
     rollupOptions: {
       output: {
         manualChunks(id) {
