@@ -48,13 +48,15 @@ export const translations: Translations = {
 
     OpenLibrary API (no longer used for link fetching).
 
-    Any UI components related to aggressive mode (e.g., AggressiveModeToggle in React).
+    Any UI components related to aggressive mode.
 
-    Yahoo search included only as a basic fallback; aggressive combined queries were removed.
+    Yahoo search included only as a basic fallback;
+
+    Aggressive combined queries were removed.
 
     - Added
 
-    Integration with Qwant API (free search engine) for keyword-specific searches.
+    Integration with Qwant API for keyword-specific searches.
 
     Integration with Hacker News API to fetch relevant posts.
 
@@ -96,7 +98,7 @@ export const translations: Translations = {
 
     All previous aggressive mode CSS / UI classes removed.
     `,
-    changelogButton: "latest update 📦",
+    changelogButton: "Latest update 🆕",
   },
   es: {
     title: "Crawrix",
@@ -171,6 +173,6 @@ export const translations: Translations = {
 
     Se eliminaron todas las clases CSS / UI de modo agresivo anteriores.
     `,
-    changelogButton: "última actualización 📦",
+    changelogButton: "Última actualización 🆕",
   },
 };
