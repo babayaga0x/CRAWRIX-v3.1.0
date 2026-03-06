@@ -16,6 +16,51 @@ Commercial use is strictly prohibited without written permission from the author
 
 # Changelog 🚀
 
+## 📦 New Updates - v3.1.0
+
+### 🔍 What's Changed?
+
+- Fully redesigned UI - minimalist dark theme with `#e8e8e8` accent
+- Replaced gold color palette with neutral soft-white system
+- Added animated search rings background (CSS-only, no JS)
+- Improved input and button UX for mobile and desktop
+- Rounded corners across all components (iPhone-style, 20px)
+- Removed scrollbar globally for cleaner look
+- Fixed search rings jitter on scroll using `will-change` and `translateZ(0)`
+- Applied modern CSS: `@layer`, `@property`, `color-mix()`, `container queries`, `:has()`, `text-wrap: balance`
+- Added `env(safe-area-inset-bottom)` support for iOS notch devices
+- Improved modal on tablet - now renders as bottom sheet
+- Added `100dvh` for correct mobile viewport handling
+- Added `touch-action: manipulation` and `min-height: 44px` on all interactive elements
+
+### 📋 Context
+
+The previous UI used a gold/yellow palette with hard borders and basic styling. This update brings the design in line with modern UI/UX standards - clean, minimal, dark, and mobile-first. No third-party UI libraries were used; everything is pure CSS.
+
+### ✅ Checklist
+
+- [x] Code is formatted (e.g., with `black`, `prettier`)
+- [x] Tested locally
+- [x] No temporary or debug code remains
+- [ ] All new dependencies are documented
+- [ ] `README.md` is updated if needed
+
+### 🧪 Testing
+
+- Tested on Chrome, Firefox, Safari (desktop)
+- Tested on iOS Safari and Android Chrome (mobile)
+- Verified modal bottom sheet behavior on tablet
+- Verified search rings stay fixed on scroll without jitter
+- Verified iOS zoom-on-focus is prevented (`font-size: 16px` on mobile input)
+
+### 💬 Additional Notes
+
+- Search rings are implemented via CSS pseudoelements on `body` and two empty `#rings`, `#rings2` divs in `index.html` - reviewers should be aware of these divs
+- `@layer` order: `base → layout → components → states`
+- `color-mix()` is used for hover states - check browser support if IE11 compatibility is needed (it's not supported there)
+
+<img width="1122" height="767" alt="Example" src="https://github.com/user-attachments/assets/da9742bc-b897-4c3f-ba48-6c01ef51c8c0" />
+
 ## 🪐GRAND UPDATE v3.0.0 – Changes Overview
 
 ### Removed
