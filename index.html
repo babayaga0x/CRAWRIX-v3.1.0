@@ -1,1 +1,662 @@
-<!doctype html><html lang="en"><head><meta charset="UTF-8" /><link rel="preconnect" href="https://fonts.googleapis.com" /><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin /><link rel="preload" href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&display=swap" as="style" onload="this.rel='stylesheet'" /><noscript><link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&display=swap" rel="stylesheet" /></noscript><script async src="https://www.googletagmanager.com/gtm.js?id=GTM-MHWFS9QR"></script><link rel="icon" type="image/svg+xml" href="/Crawrix.svg" /><meta name="description" content="Crawrix helps with keyword parsing and finding relevant content for better SEO." /><meta name="robots" content="index, follow" /><meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta property="og:title" content="Crawrix — SEO Keyword Parsing Tool" /><meta property="og:description" content="Crawrix helps with keyword parsing and finding relevant content for better SEO." /><meta property="og:type" content="website" /><meta property="og:url" content="https://www.crawrix.com" /><meta property="og:image" content="https://www.crawrix.com/Crawrix.svg" /><meta name="twitter:card" content="summary_large_image" /><meta name="twitter:title" content="Crawrix — SEO Keyword Parsing Tool" /><meta name="twitter:description" content="Crawrix helps with keyword parsing and finding relevant content for better SEO." /><meta name="twitter:image" content="https://www.crawrix.com/Crawrix.svg" /><style>:root{line-height:1.5;color-scheme:dark;background-color:#000;font-synthesis:none;text-rendering:optimizeLegibility;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;--primary-color:#ffff00;--secondary-color:#ffaa00;--background-color:#000;--border-radius:8px;--font-family:"Fira Code", monospace;--transition:0.3s ease}body{font-family:var(--font-family)}.App{margin:10vh auto 0 auto;box-sizing:border-box;max-width:500px;padding:20px;text-align:center;background-color:var(--background-color);border-radius:var(--border-radius);box-shadow:0 4px 6px rgb(255 255 0 / .4);color:var(--primary-color);transition:background-color var(--transition)}.App.aggressive-mode{background-color:#ff5733}.App.aggressive-mode h1,.App.aggressive-mode button{color:#fff}.App.aggressive-mode button{background-color:#e74c3c}hr{border:none;height:3px;background-color:var(--primary-color);margin:20px 0;border-radius:10px}h1{font-size:2rem;margin-bottom:1rem;color:var(--primary-color);text-transform:lowercase;letter-spacing:2px}input[type="text"],button{font-family:var(--font-family);font-size:1rem;border-radius:4px}input[type="text"]{width:80%;padding:10px 10px .6rem 10px;border:1px solid var(--secondary-color);outline:none;background-color:#111;color:var(--primary-color)}input[type="text"]:focus{border-color:var(--primary-color)}input::placeholder{color:#666;opacity:1;font-size:1rem;font-family:inherit}button{background-color:var(--secondary-color);color:#000;padding:10px 20px;border:none;cursor:pointer}button:hover{background-color:var(--primary-color)}button:disabled{background-color:#333;cursor:not-allowed}.result{margin-top:20px;text-align:left;background-color:#111;padding:10px;border-radius:var(--border-radius);word-wrap:break-word;overflow-wrap:break-word;white-space:normal}.result h2,.result h4{margin-bottom:.5rem;text-transform:uppercase;letter-spacing:1px}.result h2{color:var(--primary-color)}.result h4{color:var(--secondary-color)}.result a{color:var(--primary-color);text-decoration:none}.result a:hover{text-decoration:underline}.back-button{margin-top:15px;background-color:#fc0;color:#000;padding:10px 15px;border:none;cursor:pointer}.back-button:hover{background-color:var(--secondary-color)}h2{font-size:1.2rem;color:#ff6;font-family:monospace;background:none;margin-top:.5rem}.modal-overlay{position:fixed;left:0;right:0;top:0;bottom:0;background-color:rgb(0 0 0 / .5);transform:translateY(100%);opacity:0;pointer-events:none;transition:transform 0.8s ease,opacity 0.8s ease;overflow:hidden;z-index:999;align-items:flex-start;padding-top:50px}.modal-overlay.open{transform:translateY(0);opacity:1;pointer-events:auto}.modal-content{position:relative;background:var(--background-color);padding:20px;max-width:600px;width:90%;max-height:80vh;margin:0 auto;border-radius:var(--border-radius);box-shadow:0 0 6px var(--primary-color);overflow-y:auto;box-sizing:border-box}.modal-close-bar{width:50px;height:4px;background-color:#333;margin:0 auto 10px;cursor:pointer;border-radius:2px}.modal-close-bar:hover{background-color:#fffb00}.social-icons{display:flex;gap:15px;margin-top:20px}.social-icons a{display:flex;align-items:center;text-decoration:none;color:#fc0;font-size:18px;transition:color var(--transition)}.social-icons a:hover{color:#01f}.crypto-box{border:2px solid #ffd900;padding:10px;border-radius:4px;display:inline-block;background-color:rgb(255 215 0 / .1);word-break:break-word}.seo-wrapper{margin-top:150px;padding-bottom:60px;min-height:400px;box-sizing:border-box}.seo-description{background-color:#1a1a1a;padding:40px 20px;margin-top:150px;border-top:1px solid var(--primary-color);color:#ddd;font-family:var(--font-family,sans-serif);line-height:1.6;max-width:500px;margin-left:auto;margin-right:auto;border-radius:var(--border-radius);box-shadow:0 0 8px rgb(255 215 0 / .2)}.seo-description h3,.seo-description h4{color:#fc0;margin-top:20px;margin-bottom:10px;font-size:22px}.seo-description p{margin-bottom:16px;font-size:16px}.seo-description .crypto-box{margin-top:10px}.seo-description .social-icons{display:flex;gap:15px;margin-top:20px}.seo-description .social-icons a{display:flex;align-items:center;text-decoration:none;color:#fc0;font-size:18px;transition:color var(--transition)}.seo-description .social-icons a:hover{color:#01f}.footer{position:fixed;bottom:0;width:100%;display:flex;justify-content:center;align-items:center;padding:10px 20px;font-size:14px}.footer-left{position:fixed;left:15px;bottom:10px}.footer-center{position:fixed;bottom:10px;right:10px;font-size:13px;color:#fc0;padding:6px 10px;background-color:rgb(0 0 0 / .6);border-radius:5px;max-width:95vw;z-index:999;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}@media (max-width:768px){.App{padding:15px}h1{font-size:1.5rem}.big-letter{font-size:3rem}.crypto-box{display:block;width:100%;box-sizing:border-box}input[type="text"]{width:90%;margin:0 auto}button{width:auto;padding:10px 15px}.footer{font-size:12px}.modal-content{width:90%;padding:15px;max-height:80vh}.social-icons a{font-size:16px}.result{padding:10px;font-size:.95rem;overflow-wrap:anywhere}.result h2{font-size:1.2rem}.result h4{font-size:1rem}.result a{font-size:.95rem;display:block;word-break:break-word}.footer-center{left:50%;right:auto;transform:translateX(-50%);bottom:8px;text-align:center;white-space:normal;max-width:90vw}}@media (max-width:480px){.App{padding:10px}.crypto-box{display:block;width:100%;box-sizing:border-box}h1{font-size:1.2rem}.big-letter{font-size:2.5rem}input[type="text"]{width:95%;padding:6px;margin:0 auto}button{width:auto;padding:8px 12px}.result{padding:8px}.modal-content{width:90%;padding:12px;max-height:70vh}.footer{font-size:10px}.footer-left,.footer-center{font-size:10px}.social-icons a{font-size:14px}}</style><title>Crawrix</title></head><body><div id="root"></div><script type="module" src="/src/main.tsx"></script><noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-MHWFS9QR" height="0" width="0" style="display: none; visibility: hidden"></iframe></noscript></body></html>
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      rel="preload"
+      href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&display=swap"
+      as="style"
+      onload="this.rel='stylesheet'"
+    />
+    <noscript>
+      <link
+        href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&display=swap"
+        rel="stylesheet"
+      />
+    </noscript>
+    <script
+      async
+      src="https://www.googletagmanager.com/gtm.js?id=GTM-MHWFS9QR"
+    ></script>
+    <link rel="icon" type="image/svg+xml" href="/Crawrix.svg" />
+    <meta
+      name="description"
+      content="Crawrix helps with keyword parsing and finding relevant content for better SEO."
+    />
+    <meta name="robots" content="index, follow" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta property="og:title" content="Crawrix — SEO Keyword Parsing Tool" />
+    <meta
+      property="og:description"
+      content="Crawrix helps with keyword parsing and finding relevant content for better SEO."
+    />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://www.crawrix.com" />
+    <meta property="og:image" content="https://www.crawrix.com/Crawrix.svg" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Crawrix — SEO Keyword Parsing Tool" />
+    <meta
+      name="twitter:description"
+      content="Crawrix helps with keyword parsing and finding relevant content for better SEO."
+    />
+    <meta name="twitter:image" content="https://www.crawrix.com/Crawrix.svg" />
+    <style>
+      @property --ring-opacity {
+        syntax: "<number>";
+        inherits: false;
+        initial-value: 1;
+      }
+
+      @layer base, layout, components, states;
+
+      @layer base {
+        :root {
+          line-height: 1.5;
+          color-scheme: dark;
+          background-color: #0d0d0d;
+          font-synthesis: none;
+          text-rendering: optimizeLegibility;
+          -webkit-font-smoothing: antialiased;
+          -moz-osx-font-smoothing: grayscale;
+          --primary: #e8e8e8;
+          --secondary: #888;
+          --muted: #444;
+          --bg: #0d0d0d;
+          --surface: #141414;
+          --surface-2: #1a1a1a;
+          --border: #222;
+          --border-hover: #333;
+          --border-radius: 12px;
+          --border-radius-sm: 8px;
+          --border-radius-full: 999px;
+          --font-family: "Fira Code", monospace;
+          --transition: 0.18s ease;
+
+          --space-xs: 8px;
+          --space-sm: 14px;
+          --space-md: 24px;
+          --space-lg: 32px;
+          --space-xl: 48px;
+
+          --primary-dim: color-mix(in srgb, var(--primary) 40%, transparent);
+          --border-subtle: color-mix(in srgb, var(--border) 60%, transparent);
+          --surface-hover: color-mix(
+            in srgb,
+            var(--surface-2) 80%,
+            var(--primary) 20%
+          );
+        }
+
+        body {
+          font-family: var(--font-family);
+          background-color: var(--bg);
+          background-image: radial-gradient(
+            ellipse at 50% 40%,
+            #131313 0%,
+            #0d0d0d 60%
+          );
+          position: relative;
+          overflow-x: hidden;
+          scrollbar-width: none;
+        }
+
+        body::-webkit-scrollbar {
+          display: none;
+        }
+      }
+
+      @layer layout {
+        #rings,
+        #rings2 {
+          position: fixed;
+          inset: 0;
+          pointer-events: none;
+          z-index: 0;
+          will-change: transform;
+          transform: translateZ(0);
+        }
+
+        body::before,
+        body::after {
+          content: "";
+          position: fixed;
+          left: 50%;
+          top: 40%;
+          transform: translate(-50%, -50%);
+          border-radius: 50%;
+          border: 1px solid #333;
+          pointer-events: none;
+          z-index: 0;
+        }
+
+        #rings::before,
+        #rings::after,
+        #rings2::before,
+        #rings2::after {
+          content: "";
+          position: absolute;
+          left: 50%;
+          top: 40%;
+          transform: translate(-50%, -50%);
+          border-radius: 50%;
+          border: 1px solid #333;
+          pointer-events: none;
+          will-change: transform;
+        }
+
+        body::before {
+          width: 100px;
+          height: 100px;
+        }
+        body::after {
+          width: 280px;
+          height: 280px;
+        }
+        #rings::before {
+          width: 500px;
+          height: 500px;
+          opacity: 0.8;
+        }
+        #rings::after {
+          width: 750px;
+          height: 750px;
+          opacity: 0.55;
+        }
+        #rings2::before {
+          width: 1020px;
+          height: 1020px;
+          opacity: 0.3;
+        }
+        #rings2::after {
+          width: 1320px;
+          height: 1320px;
+          opacity: 0.15;
+        }
+
+        .App {
+          position: relative;
+          z-index: 1;
+          margin: 10vh auto 0;
+          box-sizing: border-box;
+          max-width: 500px;
+          width: 100%;
+          padding: var(--space-lg);
+          text-align: center;
+          background-color: var(--surface);
+          border-radius: 20px;
+          border: 1px solid var(--border);
+          color: var(--primary);
+          transition: background-color var(--transition);
+          container-type: inline-size;
+          container-name: app;
+        }
+      }
+
+      @layer components {
+        hr {
+          border: none;
+          height: 1px;
+          background-color: var(--border);
+          margin: var(--space-md) 0;
+        }
+
+        h1 {
+          font-size: clamp(1.2rem, 4vw, 1.8rem);
+          margin-bottom: 1.25rem;
+          color: var(--primary);
+          text-transform: lowercase;
+          letter-spacing: 3px;
+          font-weight: 400;
+          text-wrap: balance;
+        }
+
+        .big-letter {
+          font-size: clamp(2.5rem, 8vw, 3.5rem);
+          text-transform: uppercase;
+          font-weight: 600;
+        }
+
+        input[type="text"],
+        button {
+          font-family: var(--font-family);
+          font-size: 1rem;
+          border-radius: var(--border-radius);
+          transition: all var(--transition);
+        }
+
+        input[type="text"] {
+          width: 100%;
+          padding: 15px 18px;
+          margin-bottom: 0.75rem;
+          border: 1px solid var(--border);
+          outline: none;
+          background-color: var(--bg);
+          color: var(--primary);
+          box-sizing: border-box;
+          appearance: none;
+          -webkit-appearance: none;
+          font-size: 1rem;
+        }
+
+        input[type="text"]:focus {
+          border-color: var(--secondary);
+          background-color: #111;
+        }
+
+        input::placeholder {
+          color: var(--muted);
+          opacity: 1;
+          font-size: 1rem;
+          font-family: inherit;
+        }
+
+        button {
+          background-color: var(--primary);
+          color: #0d0d0d;
+          padding: 15px 28px;
+          border: 1px solid transparent;
+          cursor: pointer;
+          letter-spacing: 0.5px;
+          min-height: 50px;
+          min-width: 44px;
+          touch-action: manipulation;
+          appearance: none;
+          -webkit-appearance: none;
+          font-weight: 600;
+          width: 100%;
+        }
+
+        button:hover {
+          background-color: color-mix(in srgb, var(--primary) 85%, black);
+          border-color: transparent;
+        }
+
+        button:active {
+          background-color: color-mix(in srgb, var(--primary) 70%, black);
+          transform: scale(0.99);
+        }
+
+        button:disabled {
+          background-color: var(--surface-2);
+          color: var(--muted);
+          border-color: transparent;
+          cursor: not-allowed;
+        }
+
+        .result {
+          margin-top: var(--space-md);
+          text-align: left;
+          background-color: var(--bg);
+          padding: var(--space-md);
+          border-radius: var(--border-radius);
+          border: 1px solid var(--border);
+          word-wrap: break-word;
+          overflow-wrap: break-word;
+          white-space: normal;
+        }
+
+        .result:has(a) h2 {
+          color: var(--primary);
+        }
+
+        .result h2,
+        .result h4 {
+          margin-bottom: 0.5rem;
+          text-transform: uppercase;
+          letter-spacing: 2px;
+          font-size: 0.8rem;
+          text-wrap: balance;
+        }
+
+        .result h2 {
+          color: var(--primary);
+        }
+        .result h4 {
+          color: var(--secondary);
+        }
+
+        .result a {
+          color: var(--primary);
+          text-decoration: none;
+          border-bottom: 1px solid var(--muted);
+          transition: border-color var(--transition);
+          display: inline-block;
+          max-width: 100%;
+          overflow-wrap: break-word;
+          word-break: break-word;
+        }
+
+        .result a:hover {
+          border-bottom-color: var(--primary);
+        }
+
+        .back-button {
+          margin-top: var(--space-sm);
+          background-color: transparent;
+          color: var(--secondary);
+          padding: 13px 18px;
+          border: 1px solid var(--border);
+          cursor: pointer;
+          min-height: 44px;
+          width: 100%;
+          font-weight: 400;
+        }
+
+        .back-button:hover {
+          color: var(--primary);
+          border-color: var(--border-hover);
+          background-color: transparent;
+        }
+
+        h2 {
+          font-size: 1.1rem;
+          color: var(--primary);
+          font-family: monospace;
+          background: none;
+          margin-top: 0.5rem;
+          font-weight: 400;
+        }
+
+        .modal-overlay {
+          position: fixed;
+          inset: 0;
+          background-color: color-mix(in srgb, black 85%, transparent);
+          transform: translateY(100%);
+          opacity: 0;
+          pointer-events: none;
+          transition:
+            transform 0.5s ease,
+            opacity 0.5s ease;
+          overflow: hidden;
+          z-index: 999;
+          padding-top: 50px;
+          padding-bottom: env(safe-area-inset-bottom);
+        }
+
+        .modal-overlay.open {
+          transform: translateY(0);
+          opacity: 1;
+          pointer-events: auto;
+        }
+
+        .modal-content {
+          position: relative;
+          background: var(--surface);
+          padding: var(--space-lg);
+          max-width: 600px;
+          width: 90%;
+          max-height: 80vh;
+          margin: 0 auto;
+          border-radius: 20px;
+          border: 1px solid var(--border);
+          overflow-y: auto;
+          box-sizing: border-box;
+          -webkit-overflow-scrolling: touch;
+          scrollbar-width: none;
+          container-type: inline-size;
+          container-name: modal;
+        }
+
+        .modal-content::-webkit-scrollbar {
+          display: none;
+        }
+
+        .modal-close-bar {
+          width: 100%;
+          height: 44px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          margin: 0 0 var(--space-md);
+          cursor: pointer;
+          border-radius: var(--border-radius);
+          transition: background-color var(--transition);
+          position: relative;
+          touch-action: manipulation;
+        }
+
+        .modal-close-bar::after {
+          content: "";
+          width: 36px;
+          height: 3px;
+          background-color: var(--border);
+          border-radius: 2px;
+          transition:
+            background-color var(--transition),
+            width var(--transition);
+        }
+
+        .modal-close-bar:hover {
+          background-color: var(--surface-2);
+        }
+
+        .modal-close-bar:hover::after {
+          background-color: var(--secondary);
+          width: 48px;
+        }
+
+        .social-icons {
+          display: flex;
+          gap: 16px;
+          margin-top: var(--space-md);
+          flex-wrap: wrap;
+        }
+
+        .social-icons a {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          text-decoration: none;
+          border-bottom: none;
+          color: var(--secondary);
+          font-size: 16px;
+          min-height: 44px;
+          min-width: 44px;
+          transition: color var(--transition);
+          touch-action: manipulation;
+        }
+
+        .social-icons a:hover {
+          color: var(--primary);
+        }
+
+        .crypto-box {
+          border: 1px solid var(--border);
+          padding: 12px 16px;
+          border-radius: var(--border-radius);
+          display: block;
+          width: 100%;
+          background-color: var(--bg);
+          word-break: break-all;
+          font-size: 0.85rem;
+          color: var(--secondary);
+          transition: border-color var(--transition);
+          box-sizing: border-box;
+        }
+
+        .crypto-box:hover {
+          border-color: var(--border-hover);
+        }
+
+        .seo-wrapper {
+          margin-top: 120px;
+          padding-bottom: 80px;
+          min-height: 400px;
+          box-sizing: border-box;
+        }
+
+        .seo-description {
+          background-color: var(--surface);
+          padding: clamp(24px, 5vw, 40px) clamp(16px, 4vw, 28px);
+          margin-top: 120px;
+          border: 1px solid var(--border);
+          color: var(--secondary);
+          font-family: var(--font-family);
+          line-height: 1.7;
+          max-width: 500px;
+          width: 100%;
+          margin-left: auto;
+          margin-right: auto;
+          border-radius: 20px;
+          box-sizing: border-box;
+        }
+
+        .seo-description h3,
+        .seo-description h4 {
+          color: var(--primary);
+          margin-top: 20px;
+          margin-bottom: 8px;
+          font-size: 0.85rem;
+          letter-spacing: 2px;
+          text-transform: uppercase;
+          text-wrap: balance;
+        }
+
+        .seo-description p {
+          margin-bottom: 16px;
+          font-size: 0.9rem;
+          text-wrap: pretty;
+        }
+
+        .seo-description .crypto-box {
+          margin-top: 10px;
+        }
+
+        .seo-description .social-icons a {
+          color: var(--secondary);
+          border-bottom: none;
+        }
+
+        .seo-description .social-icons a:hover {
+          color: var(--primary);
+        }
+
+        @layer states {
+          .App.aggressive-mode {
+            background-color: #1a0d0d;
+            border-color: #3a1a1a;
+          }
+
+          .App.aggressive-mode h1,
+          .App.aggressive-mode button {
+            color: #e8e8e8;
+          }
+
+          .App.aggressive-mode button {
+            background-color: #2a1010;
+            border-color: #4a1a1a;
+          }
+
+          .App:has(button:disabled) input[type="text"] {
+            opacity: 0.6;
+          }
+        }
+
+        @container app (max-width: 400px) {
+          h1 {
+            letter-spacing: 2px;
+          }
+          button {
+            padding: 13px 20px;
+          }
+        }
+
+        @container modal (max-width: 400px) {
+          .social-icons {
+            gap: 8px;
+          }
+          .crypto-box {
+            font-size: 0.8rem;
+          }
+        }
+
+        /* tablet */
+        @media (max-width: 768px) {
+          .App {
+            margin: 5vh 16px 0;
+            padding: 24px 20px;
+            max-width: 100%;
+            border-radius: 20px;
+          }
+
+          .modal-content {
+            width: 100%;
+            max-width: 100%;
+            margin: 0;
+            border-radius: 24px 24px 0 0;
+            max-height: 90vh;
+            padding: 20px;
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+          }
+
+          .modal-overlay {
+            padding-top: 0;
+            display: flex;
+            align-items: flex-end;
+          }
+
+          input[type="text"] {
+            width: 100%;
+          }
+
+          .result a {
+            display: block;
+            word-break: break-word;
+          }
+        }
+
+        /* mobile */
+        @media (max-width: 480px) {
+          .App {
+            margin: 0;
+            min-height: 100dvh;
+            border-radius: 0;
+            border-left: none;
+            border-right: none;
+            padding: 24px 16px;
+            display: flex;
+            flex-direction: column;
+          }
+
+          input[type="text"] {
+            font-size: 16px;
+          }
+          h1 {
+            letter-spacing: 2px;
+          }
+          button {
+            width: 100%;
+          }
+          .back-button {
+            width: 100%;
+          }
+          .result {
+            padding: 16px;
+            font-size: 0.9rem;
+          }
+        }
+      }
+    </style>
+    <title>Crawrix</title>
+  </head>
+
+  <body>
+    <div id="rings"></div>
+    <div id="rings2"></div>
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+    <noscript
+      ><iframe
+        src="https://www.googletagmanager.com/ns.html?id=GTM-MHWFS9QR"
+        height="0"
+        width="0"
+        style="display: none; visibility: hidden"
+      ></iframe
+    ></noscript>
+  </body>
+</html>

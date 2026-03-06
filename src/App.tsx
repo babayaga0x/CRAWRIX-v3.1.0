@@ -99,13 +99,6 @@ const App: React.FC = () => {
           {t.changelogButton}
         </button>
 
-        <div className="footer">
-          <div className="footer-left">v 3.0.0</div>
-          <div className="footer-center">
-            All rights reserved. Developer: Martin Daniels.
-          </div>
-        </div>
-
         <div className={`modal-overlay ${isModalOpen ? "open" : ""}`}>
           <Suspense fallback={null}>
             <Modal
@@ -145,10 +138,8 @@ const App: React.FC = () => {
         <section className="seo-description">
           <h2>{t.modalTitle}</h2>
           <p>{t.modalContent}</p>
-
           <h2>{t.supportTitle}</h2>
           <p>{t.supportContent}</p>
-
           <div className="crypto-box">
             <p>[USDT - TRC20 | Tron] - TCorTf3kgUsp8bmvVs1coVqsCfnmNgJEJK</p>
             <hr />
@@ -157,7 +148,6 @@ const App: React.FC = () => {
               bc1qaj7nhjsanmynp3zsk8amdfdfgwms3n9hzv0ezh
             </p>
           </div>
-
           <h2>{t.connectTitle}</h2>
           <div className="social-icons">
             <a
@@ -175,6 +165,11 @@ const App: React.FC = () => {
               <FaTelegram /> Telegram
             </a>
           </div>
+          <hr />
+          All rights reserved. <br />
+          Developer: Martin Daniels.
+          <br />
+          v3.0.0
         </section>
       </div>
     </>
