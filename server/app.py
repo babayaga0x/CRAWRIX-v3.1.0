@@ -15,6 +15,7 @@ CORS(
         "https://crawllab-frontend.onrender.com",
         "https://crawrix.com",
         "https://www.crawrix.com",
+        "https://crawllab-frontend.onrender.com/ping"
     ],
 )
 
@@ -178,6 +179,7 @@ def parse():
 
 if __name__ == "__main__":
     app.run(host="0.0.0.0")
+
 
 
 
