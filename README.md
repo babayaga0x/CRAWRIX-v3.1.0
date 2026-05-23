@@ -16,6 +16,8 @@ Commercial use is strictly prohibited without written permission from the author
 
 # Changelog 🚀
 
+## New Update Domain - https://crawllab-frontend.onrender.com/
+
 ## 📦 New Updates - v3.1.0
 
 ### 🔍 What's Changed?
