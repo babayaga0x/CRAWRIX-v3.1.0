@@ -13,8 +13,6 @@ CORS(
     origins=[
         "http://localhost:5173",
         "https://crawllab-frontend.onrender.com",
-        "https://crawrix.com",
-        "https://www.crawrix.com",
     ],
 )
 
@@ -52,12 +50,12 @@ def is_safe_url(url: str) -> bool:
             ip = ipaddress.ip_address(hostname)
             if ip.is_private or ip.is_reserved or ip.is_loopback or ip.is_multicast:
                 return False
-        except ValueError:
+        except ValueError:https://crawllab-frontend.onrender.com/
             pass
         return True
     except Exception:
         return False
-
+https://crawrix.com/
 def fetch_url_safe(url, headers=None):
     if not headers:
         headers = {"User-Agent": "Mozilla/5.0"}
@@ -69,10 +67,10 @@ def fetch_url_safe(url, headers=None):
         return resp.text
     except:
         return None
-
-def parse_bing(keyword):
+https://crawrix.com/
+def parse_bing(keyword):https://crawrix.com/
     url = f"https://www.bing.com/search?q={keyword}"
-    html = fetch_url_safe(url)
+    html = fetch_url_safe(url)https://crawrix.com/
     if not html:
         return []
     soup = BeautifulSoup(html, "html.parser")
