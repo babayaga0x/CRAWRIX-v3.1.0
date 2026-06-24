@@ -14,13 +14,13 @@ Commercial use is strictly prohibited without written permission from the author
 </p>
 <hr />
 
-# Changelog 🚀
+# Changelog
 
 ## New Update Domain - https://crawllab-frontend.onrender.com/
 
-## 📦 New Updates - v3.1.0
+## New Updates - v3.1.0
 
-### 🔍 What's Changed?
+### What's Changed?
 
 - Fully redesigned UI - minimalist dark theme with `#e8e8e8` accent
 - Replaced gold color palette with neutral soft-white system
@@ -35,11 +35,11 @@ Commercial use is strictly prohibited without written permission from the author
 - Added `100dvh` for correct mobile viewport handling
 - Added `touch-action: manipulation` and `min-height: 44px` on all interactive elements
 
-### 📋 Context
+### Context
 
 The previous UI used a gold/yellow palette with hard borders and basic styling. This update brings the design in line with modern UI/UX standards - clean, minimal, dark, and mobile-first. No third-party UI libraries were used; everything is pure CSS.
 
-### ✅ Checklist
+### Checklist
 
 - [x] Code is formatted (e.g., with `black`, `prettier`)
 - [x] Tested locally
@@ -47,7 +47,7 @@ The previous UI used a gold/yellow palette with hard borders and basic styling. 
 - [ ] All new dependencies are documented
 - [ ] `README.md` is updated if needed
 
-### 🧪 Testing
+### Testing
 
 - Tested on Chrome, Firefox, Safari (desktop)
 - Tested on iOS Safari and Android Chrome (mobile)
@@ -55,7 +55,7 @@ The previous UI used a gold/yellow palette with hard borders and basic styling. 
 - Verified search rings stay fixed on scroll without jitter
 - Verified iOS zoom-on-focus is prevented (`font-size: 16px` on mobile input)
 
-### 💬 Additional Notes
+### Additional Notes
 
 - Search rings are implemented via CSS pseudoelements on `body` and two empty `#rings`, `#rings2` divs in `index.html` - reviewers should be aware of these divs
 - `@layer` order: `base → layout → components → states`
@@ -63,7 +63,7 @@ The previous UI used a gold/yellow palette with hard borders and basic styling. 
 
 <img width="1122" height="767" alt="Example" src="https://github.com/user-attachments/assets/da9742bc-b897-4c3f-ba48-6c01ef51c8c0" />
 
-## 🪐GRAND UPDATE v3.0.0 – Changes Overview
+## 🪐 GRAND UPDATE v3.0.0 – Changes Overview
 
 ### Removed
 - Aggressive mode from both frontend and backend.
@@ -134,14 +134,14 @@ The previous UI used a gold/yellow palette with hard borders and basic styling. 
 | HTTP Requests   | `requests`            | External requests with error handling |
 | CORS Handling   | `flask_cors`          | Control allowed client origins        |
 
-## 🧪 Testing
+## Testing
 
 * Verified SSRF protection with safe and unsafe URLs (e.g., private IPs, localhost).
 * Simulated search engine structure changes to ensure graceful failure.
 * Tested rate limiting behavior by sending rapid requests.
 * Validated keyword input constraints and error messages.
 
-## 💬 Additional Notes
+## Additional Notes
 
 Reviewers should focus on:
 
@@ -150,7 +150,7 @@ Reviewers should focus on:
 * Keyword validation constraints.
 * Error message consistency for client-side handling.
 
-## v1.5.2 📦 – SEO & Analytics Enhancements
+## v1.5.2 – SEO & Analytics Enhancements
 
 ### 🛠 Infrastructure
 * 📄 Updated `robots.txt`:
@@ -203,7 +203,7 @@ Reviewers should focus on:
   - Maintained structured commit history throughout development.
   - Project managed via a local Git repository.
 
-## v1.3.0 ✨– Component Refactor & UI Polish
+## v1.3.0 ✨ – Component Refactor & UI Polish
 - **Refactored the application into microservices (components)** for better maintainability and performance.
 - **Improved text styling** for enhanced readability and appearance. 🎨
 
