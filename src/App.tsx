@@ -71,9 +71,9 @@ const App: React.FC = () => {
           />
         </div>
 
-        /*<Suspense fallback={null}>
+        {/*<Suspense fallback={null}>
           <RightClickHandler />
-        </Suspense>*/
+        </Suspense>*/}
 
         <hr />
 
