@@ -6,7 +6,7 @@ import SEOManager from "./components/SEOManager";
 import KeywordInput from "./components/KeywordInput";
 import SubmitButton from "./components/SubmitButton";
 
-const RightClickHandler = lazy(() => import("./components/RightClickHandler"));
+//const RightClickHandler = lazy(() => import("./components/RightClickHandler"));
 const LanguageToggle = lazy(() => import("./components/LanguageToggle"));
 const Modal = lazy(() => import("./components/Modal"));
 
