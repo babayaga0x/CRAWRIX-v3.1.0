@@ -40,20 +40,27 @@ export const translations: Translations = {
     connectTitle: "Connect with the developer",
     aggressiveModeText: "Look for everything MORE you need",
     normalModeText: "Look for everything you need",
-    changelogContent: `v3.1.0
-    Fully redesigned UI - minimalist dark theme with #e8e8e8 accent
-    Replaced gold color palette with neutral soft-white system
-    Added animated search rings background (CSS-only, no JS)
-    Improved input and button UX for mobile and desktop
-    Rounded corners across all components (iPhone-style, 20px)
-    Removed scrollbar globally for cleaner look
-    Fixed search rings jitter on scroll using will-change and translateZ(0)
-    Applied modern CSS: @layer, @property, color-mix(), container queries, :has(), text-wrap: balance
-    Added env(safe-area-inset-bottom) support for iOS notch devices
-    Improved modal on tablet - now renders as bottom sheet
-    Added 100dvh for correct mobile viewport handling
-    Added touch-action: manipulation and min-height: 44px on all interactive elements
-    `,
+    changelogContent: `v4.0.0
+    Reorganized the frontend architecture
+    Separated API communication from the main App.tsx component
+    Added a dedicated search API layer
+    Added structured TypeScript types for search results
+    Added reusable URL truncation utility
+    Improved separation between UI components, API communication, and result processing
+    Added asynchronous search processing with asyncio.gather()
+    Added concurrent parsing across multiple search and knowledge sources
+    Added support for Bing, Yahoo, DuckDuckGo, Wikipedia, Reddit, Qwant, and Stack Exchange
+    Added automatic result classification: news, technical, knowledge, discussion, and general
+    Added URL normalization and duplicate result merging
+    Added visual category badges to search results
+    Improved search result layout and presentation
+    Added Flask async view support
+    Added Flask-Limiter request rate limiting
+    Updated CORS configuration for the deployed frontend
+    Updated frontend API communication with the deployed Flask backend
+    Added Progressive Web App (PWA) support
+    Added service worker registration and application installation support
+    Improved overall project architecture for future AI-assisted classification and result ranking`,
     changelogButton: "Latest update 🆕",
   },
   es: {
@@ -73,19 +80,27 @@ export const translations: Translations = {
     connectTitle: "Conéctate con el desarrollador",
     aggressiveModeText: "Busca todo lo que MÁS necesitas",
     normalModeText: "Busca todo lo que necesitas",
-    changelogContent: `v3.1.0
-    Interfaz de usuario completamente rediseñada: tema oscuro minimalista con acento #e8e8e8
-    Paleta de colores dorados reemplazada por un sistema blanco suave neutro
-    Fondo de anillos de búsqueda animados añadido (solo CSS, sin JS)
-    Experiencia de usuario mejorada para botones y entradas en dispositivos móviles y de escritorio
-    Esquinas redondeadas en todos los componentes (estilo iPhone, 20 px)
-    Barra de desplazamiento eliminada globalmente para una apariencia más limpia
-    Se corrigió la vibración de los anillos de búsqueda al desplazarse con will-change y translateZ(0)
-    CSS moderno aplicado: @layer, @property, color-mix(), consultas de contenedor, :has(), text-wrap: balance
-    Compatibilidad con env(safe-area-inset-bottom) añadida para dispositivos iOS con notch
-    Modal mejorado en tabletas: ahora se renderiza como hoja inferior
-    Añadido 100dvh para una correcta gestión de la ventana gráfica en dispositivos móviles
-    Añadido touch-action: manipulación y min-height: 44 px en todos los elementos interactivos
+    changelogContent: `v4.0.0
+    Arquitectura del frontend reorganizada
+    Comunicación con la API separada del componente principal App.tsx
+    Añadida una capa dedicada para la API de búsqueda
+    Añadidos tipos TypeScript estructurados para los resultados de búsqueda
+    Añadida una utilidad reutilizable para truncar URLs
+    Mejorada la separación entre componentes de UI, comunicación con la API y procesamiento de resultados
+    Añadido procesamiento asíncrono de búsquedas con asyncio.gather()
+    Añadido procesamiento concurrente de múltiples fuentes de búsqueda y conocimiento
+    Añadido soporte para Bing, Yahoo, DuckDuckGo, Wikipedia, Reddit, Qwant y Stack Exchange
+    Añadida clasificación automática de resultados: news, technical, knowledge, discussion y general
+    Añadida normalización de URLs y combinación de resultados duplicados
+    Añadidas etiquetas visuales de categorías en los resultados de búsqueda
+    Mejorado el diseño y la presentación de los resultados
+    Añadido soporte para vistas asíncronas de Flask
+    Añado Flask-Limiter para limitar solicitudes
+    Actualizada la configuración CORS para el frontend desplegado
+    Actualizada la comunicación entre el frontend y el backend Flask desplegado
+    Añadido soporte para Progressive Web App (PWA)
+    Añadido registro del service worker y soporte para instalación de la aplicación
+    Mejorada la arquitectura general del proyecto como base para futuras funciones de clasificación y ranking asistidos por IA
     `,
     changelogButton: "Última actualización 🆕",
   },
