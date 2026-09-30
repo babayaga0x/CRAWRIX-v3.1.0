@@ -19,7 +19,6 @@ CORS(
     origins=[
         "http://localhost:5173",
         "http://localhost:4173",
-        "https://crawllab-frontend.onrender.com",
         "https://crawrix-frontend.vercel.app",
     ],
 )
