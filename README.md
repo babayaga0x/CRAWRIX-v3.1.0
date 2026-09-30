@@ -18,6 +18,72 @@ Commercial use is strictly prohibited without written permission from the author
 
 ## New Update Domain - https://crawllab-frontend.onrender.com/
 
+## NEW GRAND UPDATE - v4.0.0 🚀
+
+### What's Changed?
+
+- Reorganized the frontend architecture.
+- Separated API communication from the main `App.tsx` component.
+- Added a dedicated search API layer at `src/features/search/searchApi.ts`.
+- Added structured TypeScript types for search results.
+- Added reusable URL truncation utility.
+- Improved separation between UI components, API communication, and result processing.
+- Added asynchronous search processing with `asyncio.gather()`.
+- Added concurrent parsing across multiple search and knowledge sources.
+- Added support for Bing, Yahoo, DuckDuckGo, Wikipedia, Reddit, Qwant, and Stack Exchange.
+- Added automatic result classification:
+  - `news`
+  - `technical`
+  - `knowledge`
+  - `discussion`
+  - `general`
+<hr>
+<img width="498" height="566" alt="CRAWRIX" src="https://github.com/user-attachments/assets/6d73ae00-71d8-46b9-81f6-81923adb4f1c" />
+<hr>
+
+- Added URL normalization and duplicate result merging.
+- Added visual category badges to search results.
+- Improved search result layout and presentation.
+- Added Flask async view support.
+- Updated CORS configuration for the deployed frontend.
+- Updated frontend API communication with the deployed Flask backend.
+- Added Progressive Web App (PWA) support.
+- Added service worker registration and installable application support.
+
+### Backend
+
+- Reorganized the search processing pipeline.
+- Refactored the `/parse` endpoint for asynchronous parser execution.
+- Added concurrent execution of independent search parsers.
+- Added centralized URL normalization.
+- Added source detection and result merging.
+- Added request rate limiting.
+- Updated Flask configuration to support async views.
+
+### Frontend
+
+- Reorganized frontend responsibilities.
+- Moved API logic from `App.tsx` into `searchApi.ts`.
+- Added structured `SearchResult` and `LinkResult` types.
+- Added result category badges.
+- Improved result presentation.
+- Added reusable URL truncation logic.
+- Added PWA support with `vite-plugin-pwa`.
+- Added application installation support.
+
+### Architecture
+
+The v4.0.0 update reorganizes the project into clearer layers:
+
+- UI components
+- Search API
+- Search parsers
+- Result processing
+- URL normalization
+- Source classification
+
+This provides a cleaner foundation for future features such as smarter result ranking, AI-assisted classification, and additional search sources.
+
 ## New Updates - v3.1.0
 
 ### What's Changed?
