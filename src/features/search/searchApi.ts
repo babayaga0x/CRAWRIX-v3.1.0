@@ -1,4 +1,4 @@
-const API_URL = "https://crawllab.onrender.com";
+const API_URL = "https://crawllab.onrender.com/parse";
 
 export const searchApi = async (
   keywords: string[],
