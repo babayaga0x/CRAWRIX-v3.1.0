@@ -84,8 +84,6 @@ def is_safe_url(url: str) -> bool:
     except Exception:
         return False
 
-
-#АСИНХРОННАЯ ФУНКЦИЯ (банка)________________________________________
 async def fetch_url_safe_async(url, headers=None):
 
 
@@ -112,9 +110,7 @@ async def fetch_url_safe_async(url, headers=None):
 
     except Exception:
         return None
-#___________________________________________________________
 
-#парсим бинг асинхронка________________________________________________
 async def parse_bing(keyword):
     url = f"https://www.bing.com/search?q={keyword}"
 
@@ -160,7 +156,7 @@ async def parse_bing(keyword):
         })
 
     return results[:15]
-#чистим ссылки бинга_______________________________________
+
 def clean_bing_url(url):
     try:
         parsed = urlparse(url)
@@ -181,7 +177,7 @@ def clean_bing_url(url):
         return url
     except Exception:
         return None
-#парсим яху_______________________________________________
+
 async def parse_yahoo(keyword):
     url = f"https://search.yahoo.com/search?p={keyword}"
 
@@ -202,8 +198,6 @@ async def parse_yahoo(keyword):
 
     return links[:15]
 
-#_____________________________________________________
-#duckduckgo_______________________________________________
 async def fetch_duckduckgo(keyword):
     url = (
         f"https://api.duckduckgo.com/"
@@ -301,7 +295,7 @@ async def fetch_reddit(keyword):
 
     except Exception:
         return []
-#____________________________________
+
 #qwant_______________________________
 async def fetch_qwant(keyword):
     url = (
