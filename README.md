@@ -16,7 +16,7 @@ Commercial use is strictly prohibited without written permission from the author
 
 # Changelog
 
-## New Update Domain - https://crawllab-frontend.onrender.com/
+## New Update Domain - https://crawrix-frontend.vercel.app/
 
 ## NEW GRAND UPDATE - v4.0.0 🚀
 
