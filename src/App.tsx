@@ -151,7 +151,7 @@ const App: React.FC = () => {
           All rights reserved. <br />
           Developer: Martin Daniels.
           <br />
-          v3.1.0
+          v4.0.0
         </section>
       </div>
     </>
