@@ -1,4 +1,4 @@
-const API_URL = "https://crawllab.onrender.com/parse";
+const API_URL = "https://crawrix-backend.vercel.app/parse";
 
 export const searchApi = async (
   keywords: string[],
