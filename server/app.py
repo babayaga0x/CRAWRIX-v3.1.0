@@ -1,11 +1,16 @@
+import ipaddress
+import base64
+import requests
+import httpx
+import asyncio
 from flask import Flask, redirect, request, jsonify
 from flask_cors import CORS
 from flask_limiter import Limiter
 from flask_limiter.util import get_remote_address
-import ipaddress
-import requests
 from bs4 import BeautifulSoup
-from urllib.parse import urlparse
+from utils.normalizer import normalize_links, detect_source
+from urllib.parse import urlparse, parse_qs
+
 
 app = Flask(__name__)
 
@@ -13,6 +18,7 @@ CORS(
     app,
     origins=[
         "http://localhost:5173",
+        "http://localhost:4173",
         "https://crawllab-frontend.onrender.com",
     ],
 )
@@ -79,7 +85,10 @@ def is_safe_url(url: str) -> bool:
         return False
 
 
-def fetch_url_safe(url, headers=None):
+#АСИНХРОННАЯ ФУНКЦИЯ (банка)________________________________________
+async def fetch_url_safe_async(url, headers=None):
+
+
     if not headers:
         headers = {
             "User-Agent": "Mozilla/5.0"
@@ -89,44 +98,94 @@ def fetch_url_safe(url, headers=None):
         return None
 
     try:
-        resp = session.get(
-            url,
-            headers=headers,
-            timeout=3
-        )
+        async with httpx.AsyncClient(timeout=3) as client:
+            resp = await client.get(
+                url,
+                headers=headers
+            )
+            resp.raise_for_status()
 
-        resp.raise_for_status()
+            return resp.text
 
-        return resp.text
+    except httpx.TimeoutException:
+        return None
 
     except Exception:
         return None
+#___________________________________________________________
 
-
-def parse_bing(keyword):
+#парсим бинг асинхронка________________________________________________
+async def parse_bing(keyword):
     url = f"https://www.bing.com/search?q={keyword}"
 
-    html = fetch_url_safe(url)
+    html = await fetch_url_safe_async(url)
 
     if not html:
         return []
 
     soup = BeautifulSoup(html, "html.parser")
 
-    links = [
-        a.get("href")
-        for a in soup.select("li.b_algo h2 a")
-        if a.get("href")
-        and is_safe_url(a.get("href"))
-    ]
+    results = []
 
-    return links[:15]
+    for result in soup.select("li.b_algo"):
+        a = result.select_one("h2 a")
 
+        if not a:
+            continue
 
-def parse_yahoo(keyword):
+        href = a.get("href")
+
+        if not href:
+            continue
+
+        cleaned = clean_bing_url(href)
+
+        if not cleaned or not is_safe_url(cleaned):
+            continue
+
+        title = a.get_text(strip=True)
+
+        snippet_element = result.select_one(".b_caption p")
+        snippet = (
+            snippet_element.get_text(" ", strip=True)
+            if snippet_element
+            else ""
+        )
+
+        results.append({
+            "url": cleaned,
+            "title": title,
+            "snippet": snippet,
+            "source": "bing",
+        })
+
+    return results[:15]
+#чистим ссылки бинга_______________________________________
+def clean_bing_url(url):
+    try:
+        parsed = urlparse(url)
+
+        if "bing.com" in parsed.netloc and "/ck/a" in parsed.path:
+            params = parse_qs(parsed.query)
+
+            if "u" in params:
+                encoded_url = params["u"][0]
+
+                if encoded_url.startswith("a1"):
+                    encoded_url = encoded_url[2:]
+
+                decoded = base64.b64decode(encoded_url + "==").decode("utf-8")
+
+                if is_safe_url(decoded):
+                    return decoded
+        return url
+    except Exception:
+        return None
+#парсим яху_______________________________________________
+async def parse_yahoo(keyword):
     url = f"https://search.yahoo.com/search?p={keyword}"
 
-    html = fetch_url_safe(url)
+    html = await fetch_url_safe_async(url)
 
     if not html:
         return []
@@ -143,12 +202,15 @@ def parse_yahoo(keyword):
 
     return links[:15]
 
-
-def fetch_duckduckgo(keyword):
+#_____________________________________________________
+#duckduckgo_______________________________________________
+async def fetch_duckduckgo(keyword):
     url = (
         f"https://api.duckduckgo.com/"
         f"?q={keyword}&format=json&no_redirect=1"
     )
+
+    html = await fetch_url_safe_async(url)
 
     try:
         data = session.get(
@@ -173,15 +235,16 @@ def fetch_duckduckgo(keyword):
 
     except Exception:
         return []
-
-
-def fetch_wikipedia(keyword):
+#wikipedia____________________________________________
+async def fetch_wikipedia(keyword):
     url = (
         "https://en.wikipedia.org/w/api.php"
         f"?action=query&list=search"
         f"&srsearch={keyword}"
         f"&format=json"
     )
+
+    html = await fetch_url_safe_async(url)
 
     try:
         data = session.get(
@@ -205,12 +268,14 @@ def fetch_wikipedia(keyword):
     except Exception:
         return []
 
-
-def fetch_reddit(keyword):
+#reddit____________________________________________
+async def fetch_reddit(keyword):
     url = (
         f"https://www.reddit.com/search.json"
         f"?q={keyword}&limit=15"
     )
+
+    html = await fetch_url_safe_async(url)
 
     headers = {
         "User-Agent": "Mozilla/5.0"
@@ -236,13 +301,15 @@ def fetch_reddit(keyword):
 
     except Exception:
         return []
-
-
-def fetch_qwant(keyword):
+#____________________________________
+#qwant_______________________________
+async def fetch_qwant(keyword):
     url = (
         f"https://api.qwant.com/v3/search/web"
         f"?q={keyword}&count=15&t=web"
     )
+
+    html = await fetch_url_safe_async(url)
 
     headers = {
         "User-Agent": "Mozilla/5.0"
@@ -270,8 +337,10 @@ def fetch_qwant(keyword):
         return []
 
 
-def fetch_stackexchange(keyword):
+async def fetch_stackexchange(keyword):
     url = "https://api.stackexchange.com/2.3/search/advanced"
+
+    html = await fetch_url_safe_async(url)
 
     params = {
         "order": "desc",
@@ -300,10 +369,36 @@ def fetch_stackexchange(keyword):
     except Exception:
         return []
 
+def merge_results(results):
+    merged = {}
+
+    for result in results:
+        if isinstance(result, str):
+            result = {
+                "url": result
+            }
+
+        url = result["url"]
+
+        if url not in merged:
+            merged[url] = {
+                "url": url,
+                "title": result.get("title", ""),
+                "snippets": [],
+                "sources": [],
+            }
+
+        if result.get("snippet"):
+            merged[url]["snippets"].append(result["snippet"])
+
+        if result.get("source"):
+            merged[url]["sources"].append(result["source"])
+
+    return list(merged.values())
 
 @app.route("/parse", methods=["POST"])
 @limiter.limit("10 per minute")
-def parse():
+async def parse():
 
     data = request.get_json() or {}
 
@@ -330,25 +425,51 @@ def parse():
                 }
             ), 400
 
-        bing_links = parse_bing(keyword)
-        yahoo_links = parse_yahoo(keyword)
-        duck_links = fetch_duckduckgo(keyword)
-        wiki_links = fetch_wikipedia(keyword)
-        reddit_links = fetch_reddit(keyword)
-        qwant_links = fetch_qwant(keyword)
-        se_links = fetch_stackexchange(keyword)
+        (
+            bing_links,
+            yahoo_links,
+            duck_links,
+            wiki_links,
+            reddit_links,
+            qwant_links,
+            se_links,
+        ) = await asyncio.gather(
+            parse_bing(keyword),
+            parse_yahoo(keyword),
+            fetch_duckduckgo(keyword),
+            fetch_wikipedia(keyword),
+            fetch_reddit(keyword),
+            fetch_qwant(keyword),
+            fetch_stackexchange(keyword),
+        )
 
-        combined_links = list(
-            set(
-                bing_links
-                + yahoo_links
-                + duck_links
-                + wiki_links
-                + reddit_links
-                + qwant_links
-                + se_links
-            )
-        )[:15]
+        bing_links = [
+            {
+                **item,
+                "url": normalize_links([item["url"]])[0]
+            }
+            for item in bing_links
+        ]
+
+        yahoo_links = normalize_links(yahoo_links)
+        duck_links = normalize_links(duck_links)
+        wiki_links = normalize_links(wiki_links)
+        reddit_links = normalize_links(reddit_links)
+        qwant_links = normalize_links(qwant_links)
+        se_links = normalize_links(se_links)
+
+        combined_links = merge_results(
+            bing_links
+            + yahoo_links
+            + duck_links
+            + wiki_links
+            + reddit_links
+            + qwant_links
+            + se_links
+        )
+
+        for link in combined_links:
+            link["type"] = detect_source(link["url"])
 
         results.append(
             {

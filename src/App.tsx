@@ -1,43 +1,45 @@
-import React, { useState, lazy, Suspense } from "react";
+import { useState, lazy, Suspense } from "react";
 import { translations } from "./i18n";
 import { FaGithub, FaTelegram } from "react-icons/fa";
 import ResultList from "./components/ResultList";
 import SEOManager from "./components/SEOManager";
 import KeywordInput from "./components/KeywordInput";
 import SubmitButton from "./components/SubmitButton";
+import truncateLink from "./utils/truncateLink";
+import { SearchResult } from "./components/ResultList";
+import { searchApi } from "./features/search/searchApi";
 
-//const RightClickHandler = lazy(() => import("./components/RightClickHandler"));
+
 const LanguageToggle = lazy(() => import("./components/LanguageToggle"));
 const Modal = lazy(() => import("./components/Modal"));
 
 type Language = keyof typeof translations;
 
-const truncateLink = (link: string, maxLength = 50) =>
-  link.length > maxLength ? link.substring(0, maxLength) + "..." : link;
 
-const API_URL = "https://crawllab.onrender.com/parse";
+/*const API_URL = "http://127.0.0.1:5000/parse";*/
 
 const App: React.FC = () => {
   const [keywords, setKeywords] = useState<string>("");
-  const [result, setResult] = useState<any>(null);
+  const [result, setResult] = useState<SearchResult[] | null>(null);
   const [loading, setLoading] = useState<boolean>(false);
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
   const [language, setLanguage] = useState<Language>("en");
 
   const handleSubmit = async () => {
     const keywordsArray = keywords.split(",").map((kw) => kw.trim());
+
     if (keywordsArray.length === 0) return;
+
     setLoading(true);
+
     try {
-      const response = await fetch(API_URL, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          keywords: keywordsArray,
-          lang: language === "es" ? "es" : "en",
-        }),
-      });
-      const data = await response.json();
+      const data = await searchApi(
+        keywordsArray,
+        language === "es" ? "es" : "en",
+      );
+
+      console.log("DATA FROM API:", data);
+
       setResult(data);
     } catch (error) {
       console.error("Error during fetch:", error);
@@ -56,13 +58,13 @@ const App: React.FC = () => {
   const toggleLanguage = () => setLanguage(language === "en" ? "es" : "en");
   const t = translations[language];
 
+  /*console.log("RESULT:", result);*/
   return (
     <>
       <SEOManager language={language} />
       <div className="App">
         <h1>{t.title}</h1>
         <h2>{t.subheading}</h2>
-
         <div>
           <KeywordInput
             keywords={keywords}
@@ -70,13 +72,7 @@ const App: React.FC = () => {
             placeholder={t.placeholder}
           />
         </div>
-
-        {/*<Suspense fallback={null}>
-          <RightClickHandler />
-        </Suspense>*/}
-
         <hr />
-
         <SubmitButton
           handleSubmit={handleSubmit}
           loading={loading}
@@ -104,7 +100,7 @@ const App: React.FC = () => {
             <Modal
               isOpen={isModalOpen}
               closeModal={closeModal}
-              title="Changelog 🚀"
+              title="Changelog"
               content={
                 <section>
                   <pre
@@ -138,16 +134,6 @@ const App: React.FC = () => {
         <section className="seo-description">
           <h2>{t.modalTitle}</h2>
           <p>{t.modalContent}</p>
-          <h2>{t.supportTitle}</h2>
-          <p>{t.supportContent}</p>
-          <div className="crypto-box">
-            <p>[USDT - TRC20 | Tron] - TCorTf3kgUsp8bmvVs1coVqsCfnmNgJEJK</p>
-            <hr />
-            <p>
-              [BTC - COIN | Bitcoin] -
-              bc1qaj7nhjsanmynp3zsk8amdfdfgwms3n9hzv0ezh
-            </p>
-          </div>
           <h2>{t.connectTitle}</h2>
           <div className="social-icons">
             <a

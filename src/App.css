@@ -136,6 +136,55 @@ button:disabled {
   text-decoration: underline;
 }
 
+.result-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 8px;
+}
+
+.result-link {
+  flex: 1;
+  min-width: 0;
+}
+
+.link-type {
+  flex-shrink: 0;
+  display: inline-block;
+  padding: 3px 8px;
+  border-radius: 12px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  line-height: 1.2;
+  color: #000;
+}
+
+.link-type.news {
+  background-color: #ff5252;
+}
+
+.link-type.technical {
+  background-color: #42a5f5;
+}
+
+.link-type.knowledge {
+  background-color: #ab47bc;
+  color: #fff;
+}
+
+.link-type.discussion {
+  background-color: #ff9800;
+}
+
+.link-type.general {
+  background-color: #bdbdbd;
+}
+
+.result li {
+  margin-bottom: 8px;
+  line-height: 1.6;
+}
+
 .back-button {
   margin-top: 15px;
   background-color: #ffcc00;
@@ -187,7 +236,7 @@ h2 {
   opacity: 0;
   pointer-events: none;
   transition: transform 0.8s ease, opacity 0.8s ease;
-  overflow: hidden; 
+  overflow: hidden;
   z-index: 999;
   align-items: flex-start;
   padding-top: 50px;
@@ -362,13 +411,13 @@ h2 {
   .big-letter {
     font-size: 3rem;
   }
-  
+
   .crypto-box {
     display: block;
     width: 100%;
     box-sizing: border-box;
   }
-  
+
   input[type="text"] {
     width: 90%;
     margin: 0 auto;
@@ -436,13 +485,13 @@ h2 {
   .App {
     padding: 10px;
   }
-  
+
   .crypto-box {
     display: block;
     width: 100%;
     box-sizing: border-box;
   }
-  
+
   h1 {
     font-size: 1.2rem;
   }

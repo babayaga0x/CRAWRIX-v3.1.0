@@ -44,8 +44,8 @@ The previous UI used a gold/yellow palette with hard borders and basic styling. 
 - [x] Code is formatted (e.g., with `black`, `prettier`)
 - [x] Tested locally
 - [x] No temporary or debug code remains
-- [x] All new dependencies are documented
-- [x] `README.md` is updated if needed
+- [ ] All new dependencies are documented
+- [ ] `README.md` is updated if needed
 
 ### Testing
 

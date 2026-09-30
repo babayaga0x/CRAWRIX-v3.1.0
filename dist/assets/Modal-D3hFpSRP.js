@@ -1,0 +1,1 @@
+import{j as s}from"./react-CKyyvGcj.js";import"./vendor-CsJPtmvV.js";const i=({isOpen:a,closeModal:e,title:l,content:o})=>s.jsx("div",{className:`modal-overlay ${a?"open":""}`,children:s.jsxs("div",{className:"modal-content",children:[s.jsx("div",{className:"modal-close-bar",onClick:e}),s.jsx("h3",{children:l}),s.jsx("div",{children:o})]})});export{i as default};
