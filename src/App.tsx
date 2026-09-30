@@ -15,9 +15,6 @@ const Modal = lazy(() => import("./components/Modal"));
 
 type Language = keyof typeof translations;
 
-
-/*const API_URL = "http://127.0.0.1:5000/parse";*/
-
 const App: React.FC = () => {
   const [keywords, setKeywords] = useState<string>("");
   const [result, setResult] = useState<SearchResult[] | null>(null);
@@ -58,7 +55,6 @@ const App: React.FC = () => {
   const toggleLanguage = () => setLanguage(language === "en" ? "es" : "en");
   const t = translations[language];
 
-  /*console.log("RESULT:", result);*/
   return (
     <>
       <SEOManager language={language} />
