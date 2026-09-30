@@ -6,7 +6,7 @@ Commercial use is strictly prohibited without written permission from the author
 📧 Email: danpain800@gmail.com
 
 <p align="center">
-  <img src="https://github.com/user-attachments/assets/1aab9d36-e3e9-4559-9fe8-101546436a82" alt="1" width="473" height="129" />
+  <img width="440" height="128" alt="Crawrix logo" src="https://github.com/user-attachments/assets/cca5ff51-2a18-4ab2-8489-1a945a394ae8" />
 </p>
 
 <p align="center">
